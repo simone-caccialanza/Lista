@@ -1,0 +1,6 @@
+.list-container {
+    display: grid;
+    place-items: center;
+    padding-inline-start: 0px;
+    /*height: 100vh;*/
+}
