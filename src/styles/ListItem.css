@@ -22,12 +22,6 @@ li {
     font-size: 1rem;
 }
 
-.add-button {
-    position: fixed;
-    bottom: 4%;
-    right: 7%;
-}
-
 .delete-button {
     border-radius: 8px;
     border: 1px solid transparent;

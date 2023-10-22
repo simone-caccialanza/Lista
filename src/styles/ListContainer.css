@@ -4,3 +4,18 @@
     padding-inline-start: 0px;
     /*height: 100vh;*/
 }
+
+.get-button {
+}
+
+.update-button {
+}
+
+.add-button {
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
