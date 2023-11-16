@@ -7,12 +7,17 @@ function ListItem(props){
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
+    const handleTextareaChange = (event) => {
+        const newText = event.target.value;
+        setText(newText);
+        props.updateText(props.description, newText);
+      };
     return(
     <>
         <li>
             <input 
                 type="checkbox"
-                id={`checkbox-${props.id}`}
+                id={`checkbox-${props.description}`}
                 checked={isChecked}
                 onChange={handleCheckboxChange}
             />
@@ -20,10 +25,10 @@ function ListItem(props){
                 className='list-item' 
                 col='1' 
                 style={{ textDecoration: isChecked ? 'line-through' : 'none' }}
-                defaultValue={text}>
-            </textarea>
+                value={text}
+                onChange={handleTextareaChange}/>
             <button 
-                id={`delete-${props.id}`} 
+                id={`delete-${props.description}`} 
                 className='delete-button' 
                 type="button" 
                 onClick={()=>props.onRemove(props.id)}>
