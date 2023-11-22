@@ -3,14 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import Item from './Item';
 
-function List1({ selectedListId }) {
+function List1({ selectedListId, createList }) {
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    if (selectedListId) {
-      fetchItems(selectedListId);
-    }
-  }, [selectedListId]);
+  // useEffect(() => {
+  //   if (selectedListId) {
+  //     fetchItems(selectedListId);
+  //   }
+  // }, [selectedListId]);
 
   const fetchItems = async (listId) => {
     try {
@@ -82,6 +82,9 @@ function List1({ selectedListId }) {
   // Rest of the List component remains the same
 
   return (
+    <>
+    <button onClick={()=>fetchItems(selectedListId)}>Get List</button>
+    <button onClick={()=>createList()}>Create List</button>
     <div className="List">
       <h2>List Items</h2>
       {items.map((item) => (
@@ -94,6 +97,8 @@ function List1({ selectedListId }) {
       ))}
       <button onClick={addItemToBackend}>Add Item</button>
     </div>
+    </>
+    
   );
 }
 
