@@ -83,8 +83,8 @@ function List1({ selectedListId, createList }) {
 
   return (
     <>
-    <button onClick={()=>fetchItems(selectedListId)} onTouchStart={()=>fetchItems(selectedListId)}>Get List</button>
-    <button onClick={()=>createList()} onTouchStart={()=>createList()}>Create List</button>
+    <button onTouchEnd={()=>fetchItems(selectedListId)}>Get List</button>
+    <button onTouchEnd={()=>createList()}>Create List</button>
     <div className="List">
       <h2>List Items</h2>
       {items.map((item) => (
@@ -95,7 +95,7 @@ function List1({ selectedListId, createList }) {
           onUpdate={updateItemInBackend}
         />
       ))}
-      <button onClick={addItemToBackend} onTouchStart={addItemToBackend}>Add Item</button>
+      <button onTouchEnd={addItemToBackend}>Add Item</button>
     </div>
     </>
     
