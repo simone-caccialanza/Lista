@@ -10,7 +10,7 @@ function App() {
   const createList = async (listItems) => {
     try {
       const newList = { lista:{items: listItems!=null?listItems:[]} }
-      const response = await fetch('http://localhost:8080/items', {
+      const response = await fetch('http://localhost:8081/items', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
