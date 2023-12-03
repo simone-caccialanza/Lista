@@ -14,7 +14,7 @@ function List1({ selectedListId, createList }) {
 
   const fetchItems = async (listId) => {
     try {
-      const response = await fetch(`http://localhost:8081/items?listaId=${listId}`);
+      const response = await fetch(`https://javaserver-application.onrender.com/items?listaId=${listId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch items');
       }
@@ -28,7 +28,7 @@ function List1({ selectedListId, createList }) {
   const addItemToBackend = async () => {
     try {
       const newItem = { description: 'New Item' }; // Replace with actual new item data
-      const response = await fetch('http://localhost:8081/items', {
+      const response = await fetch('https://javaserver-application.onrender.com/items', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ function List1({ selectedListId, createList }) {
 
   const removeItemFromBackend = async (itemId) => {
     try {
-      const response = await fetch(`http://localhost:8081/items/${itemId}`, {
+      const response = await fetch(`https://javaserver-application.onrender.com/items/${itemId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
@@ -62,7 +62,7 @@ function List1({ selectedListId, createList }) {
 
   const updateItemInBackend = async (updatedItem) => {
     try {
-      const response = await fetch(`http://localhost:8081/items`, {
+      const response = await fetch(`https://javaserver-application.onrender.com/items`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
