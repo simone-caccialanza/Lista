@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import List from './List';
 import './App.css';
+import { BASE_URL } from './Constants';
 
 function App() {
   const [selectedListId, setSelectedListId] = useState('');
@@ -10,7 +11,7 @@ function App() {
   const createList = async (listItems) => {
     try {
       const newList = { lista:{items: listItems!=null?listItems:[]} }
-      const response = await fetch('http://localhost:8081/items', {
+      const response = await fetch(`${BASE_URL}/items`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
