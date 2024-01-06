@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Item({ item, onRemove, onUpdate }) {
   const [checked, setChecked] = useState(false);
   const [text, setText] = useState(item.description);
+
+  useEffect(() => {
+    setText(item.description);
+  }, [item.description]);
 
   const handleCheckboxChange = () => {
     const updatedItem = { ...item, checked: !checked };
