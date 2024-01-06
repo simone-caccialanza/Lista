@@ -1,7 +1,7 @@
 // App.js
 
 import React, { useState } from 'react';
-import List1 from './List1';
+import List from './List';
 import './App.css';
 
 function App() {
@@ -33,9 +33,13 @@ function App() {
         type="text"
         placeholder="Enter List ID"
         value={selectedListId}
-        onChange={(e) => setSelectedListId(e.target.value)}
+        onChange={(e) => {
+          setSelectedListId(e.target.value);
+          console.log(selectedListId);
+        }
+        }
       />
-      <List1 selectedListId={selectedListId} createList={createList} />
+      <List selectedListId={selectedListId} createList={createList} />
     </div>
   );
 }
