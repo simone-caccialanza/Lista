@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Item from './Item';
-import { BASE_URL } from './Constants';
+import { BASE_URL, UPDATE_INTERVAL_MS } from './Constants';
 
 function List({ selectedListId, createList }) {
   const [items, setItems] = useState([]);
   const [itemsToUpdateArray, setItemsToUpdateArray] = useState([]);
 
-  const UPDATE_INTERVAL_MS = 5000;
-
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('Updating every ' + UPDATE_INTERVAL_MS/1000 + ' seconds');
       if (itemsToUpdateArray.length > 0) {
         updateItems(itemsToUpdateArray);
         setItemsToUpdateArray([]);
@@ -45,7 +42,6 @@ function List({ selectedListId, createList }) {
         throw new Error('Failed to fetch items');
       }
       const data = await response.json();
-      console.log(items)
       setItems(data.payload.items);
     } catch (error) {
       console.error('Error fetching items:', error);

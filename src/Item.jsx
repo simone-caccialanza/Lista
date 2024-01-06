@@ -5,12 +5,14 @@ function Item({ item, onRemove, onUpdate }) {
   const [text, setText] = useState(item.description);
 
   useEffect(() => {
+    setChecked(item.checked);
     setText(item.description);
-  }, [item.description]);
+  }, [item]);
 
   const handleCheckboxChange = () => {
-    const updatedItem = { ...item, checked: !checked };
-    setChecked(!checked);
+    const newChecked = !checked;
+    setChecked(newChecked);
+    const updatedItem = { ...item, checked: newChecked };
     onUpdate(updatedItem);
   };
 
