@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Item from './Item';
 import './styles/List.css';
 import { BASE_URL, UPDATE_INTERVAL_MS } from './Constants';
@@ -6,6 +6,8 @@ import { BASE_URL, UPDATE_INTERVAL_MS } from './Constants';
 function List({ selectedListId, createList }) {
   const [items, setItems] = useState([]);
   const [itemsToUpdateArray, setItemsToUpdateArray] = useState([]);
+
+  const newItemInputRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,9 +19,14 @@ function List({ selectedListId, createList }) {
         fetchItems(selectedListId); 
       }
     }, UPDATE_INTERVAL_MS);
-
     return () => clearInterval(interval);
   }, [selectedListId, itemsToUpdateArray]);
+
+  useEffect(() => {
+    if (newItemInputRef.current) {
+      newItemInputRef.current.focus();
+    }
+  }, [items]);
 
   const updateItems = async (itemsToUpdate) => {
     try {
@@ -71,7 +78,7 @@ function List({ selectedListId, createList }) {
 
   const addItemToBackend = async () => {
     try {
-      const newItem = { description: 'New Item', timestamp: Date.now() }; // Replace with actual new item data
+      const newItem = { description: '', timestamp: Date.now() };
       const response = await fetch(`${BASE_URL}/items`, {
         method: 'PATCH',
         headers: {
@@ -83,7 +90,7 @@ function List({ selectedListId, createList }) {
         throw new Error('Failed to add item');
       }
       const data = await response.json();
-      setItems((prevItems) => [...prevItems, ...data.payload.items]);
+      mergeItems(data.payload.items);
     } catch (error) {
       console.error('Error adding item:', error);
     }
@@ -133,12 +140,14 @@ function List({ selectedListId, createList }) {
       </div>
       <div className="List">
         <h2>LISTA</h2>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <Item
             key={item.id}
             item={item}
             onRemove={removeItemFromBackend}
             onUpdate={addItemToUpdate}
+            onKeyPressedEnter={addItemToBackend}
+            inputRef={index === items.length - 1 ? newItemInputRef : null}
           />
         ))}
         <button className='add-button bouncy-button' onClick={addItemToBackend}>Add Item</button>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles/Item.css'
 
-function Item({ item, onRemove, onUpdate }) {
+function Item({ item, onRemove, onUpdate, onKeyPressedEnter, inputRef }) {
   const [checked, setChecked] = useState(false);
   const [text, setText] = useState(item.description);
 
@@ -17,6 +17,12 @@ function Item({ item, onRemove, onUpdate }) {
     onUpdate(updatedItem);
   };
 
+  const handleKeyPress = (e) => {
+    if(e.key === 'Enter'){
+      onKeyPressedEnter();
+    }
+  }
+
   const handleTextChange = (e) => {
     const newText = e.target.value;
     setText(newText);
@@ -31,7 +37,16 @@ function Item({ item, onRemove, onUpdate }) {
   return (
     <div className="Item">
       <input className='custom-checkbox' type="checkbox" checked={checked} onChange={handleCheckboxChange} />
-      <input className='item-text' type='text' value={text} maxLength="15" onChange={handleTextChange} />
+      <input
+        ref={inputRef} 
+        className='item-text' 
+        type='text' 
+        placeholder="New Item" 
+        value={text} 
+        maxLength="15" 
+        onChange={handleTextChange}
+        onKeyDown={handleKeyPress}
+         />
       <button className='remove-button' onClick={handleRemove}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
