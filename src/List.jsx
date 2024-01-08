@@ -42,15 +42,35 @@ function List({ selectedListId, createList }) {
         throw new Error('Failed to fetch items');
       }
       const data = await response.json();
-      setItems(data.payload.items);
+      mergeItems(data.payload.items);
     } catch (error) {
       console.error('Error fetching items:', error);
     }
   };
 
+  const mergeItems = (backendItems) => {
+    setItems((prevItems)=>{
+      const updatedItems = [...prevItems];
+      backendItems.forEach((backendItem)=>{
+        const existingItemIndex = updatedItems.findIndex(
+          (item) =>
+            item.id === backendItem.id
+        );
+        if (existingItemIndex !== -1) {
+          if (backendItem.timestamp > updatedItems[existingItemIndex].timestamp){
+            updatedItems[existingItemIndex] = backendItem;
+          }
+        } else {
+          updatedItems.push(backendItem);
+        }
+      });
+      return updatedItems;
+    });
+  }
+
   const addItemToBackend = async () => {
     try {
-      const newItem = { description: 'New Item' }; // Replace with actual new item data
+      const newItem = { description: 'New Item', timestamp: Date.now() }; // Replace with actual new item data
       const response = await fetch(`${BASE_URL}/items`, {
         method: 'PATCH',
         headers: {

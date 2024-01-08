@@ -12,14 +12,14 @@ function Item({ item, onRemove, onUpdate }) {
   const handleCheckboxChange = () => {
     const newChecked = !checked;
     setChecked(newChecked);
-    const updatedItem = { ...item, checked: newChecked };
+    const updatedItem = { ...item, checked: newChecked, timestamp: Date.now() };
     onUpdate(updatedItem);
   };
 
   const handleTextChange = (e) => {
     const newText = e.target.value;
     setText(newText);
-    const updatedItem = { ...item, description: newText };
+    const updatedItem = { ...item, description: newText, timestamp: Date.now() };
     onUpdate(updatedItem);
   };
 
