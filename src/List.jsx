@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Item from './Item';
+import './styles/List.css';
 import { BASE_URL, UPDATE_INTERVAL_MS } from './Constants';
 
 function List({ selectedListId, createList }) {
@@ -125,11 +126,13 @@ function List({ selectedListId, createList }) {
   // Rest of the functions remain the same
 
   return (
-    <>
-      <button onClick={() => fetchItems(selectedListId)}>Get List</button>
-      <button onClick={() => createList()}>Create List</button>
+    <div>
+      <div className='button-container'>
+        <button className='bouncy-button' onClick={() => fetchItems(selectedListId)}>Get List</button>
+        <button className='bouncy-button' onClick={() => createList()}>Create List</button>
+      </div>
       <div className="List">
-        <h2>List Items</h2>
+        <h2>LISTA</h2>
         {items.map((item) => (
           <Item
             key={item.id}
@@ -138,9 +141,9 @@ function List({ selectedListId, createList }) {
             onUpdate={addItemToUpdate}
           />
         ))}
-        <button onClick={addItemToBackend}>Add Item</button>
+        <button className='add-button bouncy-button' onClick={addItemToBackend}>Add Item</button>
       </div>
-    </>
+    </div>
   );
 }
 

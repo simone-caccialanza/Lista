@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './styles/Item.css'
 
 function Item({ item, onRemove, onUpdate }) {
   const [checked, setChecked] = useState(false);
@@ -29,9 +30,26 @@ function Item({ item, onRemove, onUpdate }) {
 
   return (
     <div className="Item">
-      <input type="checkbox" checked={checked} onChange={handleCheckboxChange} />
-      <textarea value={text} onChange={handleTextChange} />
-      <button onClick={handleRemove}>Remove</button>
+      <input className='custom-checkbox' type="checkbox" checked={checked} onChange={handleCheckboxChange} />
+      <input className='item-text' type='text' value={text} maxLength="15" onChange={handleTextChange} />
+      <button className='remove-button' onClick={handleRemove}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="#ffffff"
+        >
+          <path
+            fill="none"
+            d="M0 0h24v24H0V0z"
+          />
+          <path
+            fill="#ffffff"
+            d="M9 3h6a1 1 0 0 1 1 1v1h4a1 1 0 0 1 1 1v2h-2v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8H4V6a1 1 0 0 1 1-1h4V4a1 1 0 0 1 1-1zm5 3H10V4h4v2zm-1 14V8h2v12h-2z"
+    />
+        </svg>
+      </button>
     </div>
   );
 }

@@ -1,6 +1,37 @@
-.list-container {
-    display: grid;
-    place-items: center;
-    padding-inline-start: 0px;
-    /*height: 100vh;*/
+.button-container {
+    display: flex;
+    place-content: space-around;
+}
+
+.bouncy-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #999;
+    border-radius: 8px;
+    background-color: #ccc;
+    box-shadow: 0 4px #999;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+  
+.bouncy-button:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.remove-button {
+    display: inline-block;
+    padding: 10px;
+    background-color: #ff0000; /* Red background color for the button */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    /* Add additional styles as needed */
+}
+
+.add-button {
+    background-color: #16df63;
+}
+
+.Item {
+    display: flex;
 }

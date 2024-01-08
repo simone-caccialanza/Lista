@@ -31,6 +31,7 @@ function App() {
   return (
     <div className="App">
       <input
+      className='listId-input'
         type="text"
         placeholder="Enter List ID"
         value={selectedListId}

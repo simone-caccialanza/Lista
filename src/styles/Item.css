@@ -1,0 +1,10 @@
+.item-text{
+    font-size: x-large;
+}
+
+/* Define a class for custom checkboxes */
+.custom-checkbox {
+    height: 47px;
+    width: 47px;
+    margin: 0px 0.5px 0px 0px;
+}
