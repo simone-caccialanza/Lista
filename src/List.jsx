@@ -67,6 +67,8 @@ function List({ selectedListId, createList }) {
         if (existingItemIndex !== -1) {
           if (backendItem.timestamp > updatedItems[existingItemIndex].timestamp){
             updatedItems[existingItemIndex] = backendItem;
+          } else if (backendItem.timestamp < updatedItems[existingItemIndex].timestamp) {
+            updateItemInBackend(updatedItems[existingItemIndex])
           }
         } else {
           updatedItems.push(backendItem);
@@ -123,14 +125,12 @@ function List({ selectedListId, createList }) {
       if (!response.ok) {
         throw new Error('Failed to update item');
       }
-      const updatedItems = items.map((item) => (item.id === updatedItem.id ? updatedItem : item));
-      setItems(updatedItems);
+      const data = await response.json();
+      mergeItems(data.payload.items);
     } catch (error) {
       console.error('Error updating item:', error);
     }
   };
-
-  // Rest of the functions remain the same
 
   return (
     <div>
