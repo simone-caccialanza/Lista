@@ -10,7 +10,7 @@ function App() {
 
   const createList = async (listItems) => {
     try {
-      const newList = { lista:{items: listItems!=null?listItems:[]} }
+      const newList = { lista:{items: listItems!=null?listItems:[], friendlyId: selectedListId!=null?selectedListId:'common'} }
       const response = await fetch(`${BASE_URL}/items`, {
         method: 'POST',
         headers: {
@@ -22,7 +22,7 @@ function App() {
         throw new Error('Failed create a new Lista');
       }
       const data = await response.json();
-      setSelectedListId(data.payload.id);
+      setSelectedListId(data.payload.friendlyId);
     } catch (error) {
       console.error('Error creating a new Lista:', error);
     }
@@ -35,10 +35,7 @@ function App() {
         type="text"
         placeholder="Enter List ID"
         value={selectedListId}
-        onChange={(e) => {
-          setSelectedListId(e.target.value);
-          console.log(selectedListId);
-        }
+        onChange={(e) => {setSelectedListId(e.target.value);}
         }
       />
       <List selectedListId={selectedListId} createList={createList} />

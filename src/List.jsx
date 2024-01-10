@@ -86,7 +86,7 @@ function List({ selectedListId, createList }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ lista: { id: selectedListId, items: [newItem] } }),
+        body: JSON.stringify({ lista: { friendlyId: selectedListId, items: [newItem] } }),
       });
       if (!response.ok) {
         throw new Error('Failed to add item');
@@ -120,7 +120,7 @@ function List({ selectedListId, createList }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ lista: { id: selectedListId, items: [updatedItem] } }),
+        body: JSON.stringify({ lista: { friendlyId: selectedListId, items: [updatedItem] } }),
       });
       if (!response.ok) {
         throw new Error('Failed to update item');
