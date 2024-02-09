@@ -8,6 +8,8 @@ import { BASE_URL } from './Constants';
 function App() {
   const [selectedListId, setSelectedListId] = useState('');
 
+  const lastUsedListId = localStorage.getItem("ListaId")
+
   const createList = async (listItems) => {
     try {
       const newList = { lista:{items: listItems!=null?listItems:[], friendlyId: selectedListId!=null?selectedListId:'common'} }
@@ -23,6 +25,7 @@ function App() {
       }
       const data = await response.json();
       setSelectedListId(data.payload.friendlyId);
+      lastUsedListId = data.payload.friendlyId;
     } catch (error) {
       console.error('Error creating a new Lista:', error);
     }
@@ -34,11 +37,11 @@ function App() {
       className='listId-input'
         type="text"
         placeholder="Enter List ID"
-        value={selectedListId}
+        value={lastUsedListId != null? lastUsedListId: selectedListId}
         onChange={(e) => {setSelectedListId(e.target.value);}
         }
       />
-      <List selectedListId={selectedListId} createList={createList} />
+      <List selectedListId={lastUsedListId != null? lastUsedListId: selectedListId} createList={createList} />
     </div>
   );
 }

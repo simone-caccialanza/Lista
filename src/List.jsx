@@ -28,6 +28,10 @@ function List({ selectedListId, createList }) {
     }
   }, [items]);
 
+  useEffect(() => {
+    fetchItems(selectedListId);
+  }, []);
+
   const updateItems = async (itemsToUpdate) => {
     try {
       const promises = itemsToUpdate.map(updateItemInBackend);
@@ -51,10 +55,12 @@ function List({ selectedListId, createList }) {
       }
       const data = await response.json();
       mergeItems(data.payload.items);
+      localStorage.setItem("ListaId",listId);
     } catch (error) {
       console.error('Error fetching items:', error);
     }
   };
+
 
   const mergeItems = (backendItems) => {
     setItems((prevItems)=>{

@@ -35,7 +35,7 @@ function Item({ item, onRemove, onUpdate, onKeyPressedEnter, inputRef }) {
   };
 
   return (
-    <div className="Item">
+    <div className="Item slide-in-from-top handle-z-index">
       <input className='custom-checkbox' type="checkbox" checked={checked} onChange={handleCheckboxChange} />
       <input
         ref={inputRef} 
