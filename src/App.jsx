@@ -1,14 +1,27 @@
 // App.js
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import List from './List';
 import './App.css';
 import { BASE_URL } from './Constants';
+import OneSignal from 'react-onesignal';
 
 function App() {
   const [selectedListId, setSelectedListId] = useState('');
 
-  const lastUsedListId = localStorage.getItem("ListaId")
+  let lastUsedListId = localStorage.getItem("ListaId")
+
+  const [initialized, setInitialized] = useState(false);
+  
+  // useEffect(() => {
+  //   async function startOneSignal(){
+  //     await OneSignal.init({ appId: 'da49eaab-8f0d-4479-b8ae-db7b75e0cafa', allowLocalhostAsSecureOrigin: true }).then(() => {
+  //       setInitialized(true);
+  //       OneSignal.Slidedown.promptPush();
+  //     })
+  //   };
+  //   startOneSignal();
+  // },[]);
 
   const createList = async (listItems) => {
     try {
